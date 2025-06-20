@@ -76,6 +76,50 @@ FETCH NEXT @Take ROWS ONLY;
 @using USPage;
 @model MyViewModel
 
+<style>
+    .pagination-custom {
+        display: flex;
+        list-style: none;
+        padding-left: 0;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .pagination-custom .page-item {
+        font-size: 16px;
+    }
+
+    .pagination-custom .page-item span,
+    .pagination-custom .page-item a {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        border-radius: 50%;
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.2s;
+    }
+
+    .pagination-custom .page-item.active span,
+    .pagination-custom .page-item.active a {
+        background-color: #e0e0e0;
+        font-weight: bold;
+    }
+
+    .pagination-custom .page-item.disabled span {
+        opacity: 0.5;
+        cursor: default;
+    }
+
+    .pagination-custom .dots {
+        padding: 0 0.5rem;
+        color: #999;
+    }
+</style>
+
 <p>Total Applications: @Model.TotalApplications</p>
 <div id = "results">
     <table>
