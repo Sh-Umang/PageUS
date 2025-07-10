@@ -17,7 +17,7 @@ Other pagination libraries often require fetching **all records** just to comput
 
 ---
 
-## ⚡ What's new?
+## 🔄 What's new?
 
 `PageUS` v2.0.0 now supports pagination for IQueryable sources.
 
