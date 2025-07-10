@@ -35,7 +35,7 @@ dotnet add package PageUS
 var pg = new PageUS(page, pageSize);
 
 // Call your SP using Skip and Take
-var results = obj.spGetPagedResults(search, pg.Skip, pg.Take);
+var results = _dbContext.spGetPagedResults(search, pg.Skip, pg.Take);
 
 // If SP returns total record count
 pg.TotalCount = results.FirstOrDefault()?.TotalRecords ?? 0;
@@ -55,12 +55,12 @@ var viewModel = new MyViewModel
 ```csharp
 
 // Call your SP using Skip and Take
-var results = obj.Table.ToPageUSResult(page, pageSize);
+var results = _dbContext.Table.ToPageUSResult(page, pageSize);
 
 var viewModel = new MyViewModel
 {
     Applications2 = results,
-    TotalApplications = obj.Table.Count();
+    TotalApplications = _dbContext.Table.Count();
 };
 
 ```
