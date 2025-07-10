@@ -130,7 +130,7 @@ FETCH NEXT @Take ROWS ONLY;
 </div>
 
 @Ajax.AjaxPagination(
-    Model.Application2,
+    Model.Applications2,
     page => Url.Action("Index", new { page }),
     new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "results" }
 )
