@@ -31,7 +31,7 @@ dotnet add package PageUS
 
 ## 💻 Backend Example 1 (StoredProcedure call)
 
-````csharp
+```csharp
 var pg = new PageUS(page, pageSize);
 
 // Call your SP using Skip and Take
@@ -46,7 +46,9 @@ var viewModel = new MyViewModel
     Applications1 = results.ToPageUSList(pg),
     TotalApplications = pg.TotalCount
 };
+```
 
+---
 
 ## 💻 Backend Example 2 (IQueryable call)
 
@@ -61,7 +63,7 @@ var viewModel = new MyViewModel
     TotalApplications = obj.Table.Count();
 };
 
-````
+```
 
 ---
 
