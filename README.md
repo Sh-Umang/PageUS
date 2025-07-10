@@ -86,6 +86,7 @@ FETCH NEXT @Take ROWS ONLY;
 @using USPage;
 @model MyViewModel
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+<link rel="stylesheet" href="Content/styles.css">  <!-- Find it inside Content folder -->
 
 <p>Total Applications: @Model.TotalApplications</p>
 <div id = "results">
@@ -115,6 +116,7 @@ FETCH NEXT @Take ROWS ONLY;
 @using USPage;
 @model MyViewModel
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+<link rel="stylesheet" href="Content/styles.css">  <!-- Find it inside Content folder -->
 
 <p>Total Applications: @Model.TotalApplications</p>
 <div id = "results">
