@@ -21,6 +21,8 @@ Other pagination libraries often require fetching **all records** just to comput
 
 `PageUS` v2.0.0 now supports pagination for IQueryable sources.
 
+---
+
 ## 📦 Installation
 
 ```bash
