@@ -62,7 +62,7 @@ var results = _dbContext.Table.ToPageUSResult(page, pageSize);
 var viewModel = new MyViewModel
 {
     Applications2 = results,
-    TotalApplications = _dbContext.Table.Count();
+    TotalApplications = results.pageUS.TotalCount;
 };
 
 ```
