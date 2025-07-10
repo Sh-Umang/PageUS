@@ -1,5 +1,3 @@
-D:\Programming\.NET\PageUSv1.0\bin\Release\PageUSv1.0.dll
-D:\Programming\.NET\PageUSv1.0\bin\Release\PageUSv1.0.pdb
 D:\Programming\.NET\PageUSv1.0\bin\Release\Microsoft.Web.Infrastructure.dll
 D:\Programming\.NET\PageUSv1.0\bin\Release\System.Web.Helpers.dll
 D:\Programming\.NET\PageUSv1.0\bin\Release\System.Web.Mvc.dll
@@ -13,8 +11,10 @@ D:\Programming\.NET\PageUSv1.0\bin\Release\System.Web.Razor.xml
 D:\Programming\.NET\PageUSv1.0\bin\Release\System.Web.WebPages.xml
 D:\Programming\.NET\PageUSv1.0\bin\Release\System.Web.WebPages.Deployment.xml
 D:\Programming\.NET\PageUSv1.0\bin\Release\System.Web.WebPages.Razor.xml
-D:\Programming\.NET\PageUSv1.0\obj\Release\PageUSv1.0.csproj.CoreCompileInputs.cache
-D:\Programming\.NET\PageUSv1.0\obj\Release\PageUSv1.0.csproj.CopyComplete
-D:\Programming\.NET\PageUSv1.0\obj\Release\PageUSv1.0.dll
-D:\Programming\.NET\PageUSv1.0\obj\Release\PageUSv1.0.pdb
-D:\Programming\.NET\PageUSv1.0\obj\Release\PageUSv1.0.csproj.AssemblyReference.cache
+D:\Programming\.NET\PageUSv1.0\obj\Release\PageUS.csproj.CoreCompileInputs.cache
+D:\Programming\.NET\PageUSv1.0\obj\Release\PageUS.csproj.CopyComplete
+D:\Programming\.NET\PageUSv1.0\bin\Release\PageUS.dll
+D:\Programming\.NET\PageUSv1.0\bin\Release\PageUS.pdb
+D:\Programming\.NET\PageUSv1.0\obj\Release\PageUS.csproj.AssemblyReference.cache
+D:\Programming\.NET\PageUSv1.0\obj\Release\PageUS.dll
+D:\Programming\.NET\PageUSv1.0\obj\Release\PageUS.pdb

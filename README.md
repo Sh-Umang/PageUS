@@ -1,12 +1,12 @@
 # PageUS
 
-`PageUS` is a lightweight pagination utility created to simplify paginated data handling in ASP.NET MVC apps — especially when working with **stored procedures** and server-side data sources.
+`PageUS` is a lightweight offset based pagination utility created to simplify paginated data handling in ASP.NET MVC apps — especially when working with **stored procedures** and server-side data sources.
 
 ---
 
 ## ⚡ Why PageUS?
 
-Other pagination libraries often require fetching **all records** just to compute total pages — which slows down performance for large datasets.
+Other pagination libraries often require fetching **all records** just to compute total pages — slowing down performance for large datasets.
 
 `PageUS` solves this with:
 
@@ -17,6 +17,10 @@ Other pagination libraries often require fetching **all records** just to comput
 
 ---
 
+## ⚡ What's new?
+
+`PageUS` v2.0.0 now supports pagination for IQueryable sources.
+
 ## 📦 Installation
 
 ```bash
@@ -25,35 +29,39 @@ dotnet add package PageUS
 
 ---
 
-## 🧠 Typical Use Case
+## 💻 Backend Example 1 (StoredProcedure call)
 
-> You want to paginate large datasets using a stored procedure that accepts `@Skip` and `@Take` — and return results efficiently **without fetching all records**.
+````csharp
+var pg = new PageUS(page, pageSize);
 
----
+// Call your SP using Skip and Take
+var results = obj.spGetPagedResults(search, pg.Skip, pg.Take);
 
-## 💻 Backend Example (Controller)
+// If SP returns total record count
+pg.TotalCount = results.FirstOrDefault()?.TotalRecords ?? 0;
+
+var viewModel = new MyViewModel
+{
+    pageUs = pg,
+    Applications1 = results.ToPageUSList(pg),
+    TotalApplications = pg.TotalCount
+};
+
+
+## 💻 Backend Example 2 (IQueryable call)
 
 ```csharp
-public ActionResult Index(string search = "", int page = 1, int pageSize = 10)
+
+// Call your SP using Skip and Take
+var results = obj.Table.ToPageUSResult(page, pageSize);
+
+var viewModel = new MyViewModel
 {
-    var pg = new PageUS(page, pageSize);
+    Applications2 = results,
+    TotalApplications = obj.Table.Count();
+};
 
-    // Call your SP using Skip and Take
-    var results = _myService.GetPagedResults(search, pg.Skip, pg.Take);
-
-    // If SP returns total record count
-    pg.TotalCount = results.FirstOrDefault()?.TotalRecords ?? 0;
-
-    var viewModel = new MyViewModel
-    {
-        pageUs = pg,
-        Applications = results.ToPageUSList(pg),
-        TotalApplications = pg.TotalCount
-    };
-
-    return View(viewModel);
-}
-```
+````
 
 ---
 
@@ -70,64 +78,21 @@ FETCH NEXT @Take ROWS ONLY;
 
 ---
 
-## 🖼 View Example (Razor)
+## 🖼 View Example For Stored Procedure (Razor)
 
 ```cshtml
 @using USPage;
 @model MyViewModel
-
-<style>
-    .pagination-custom {
-        display: flex;
-        list-style: none;
-        padding-left: 0;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .pagination-custom .page-item {
-        font-size: 16px;
-    }
-
-    .pagination-custom .page-item span,
-    .pagination-custom .page-item a {
-        display: inline-block;
-        width: 32px;
-        height: 32px;
-        line-height: 32px;
-        text-align: center;
-        border-radius: 50%;
-        color: #333;
-        text-decoration: none;
-        transition: background-color 0.2s;
-    }
-
-    .pagination-custom .page-item.active span,
-    .pagination-custom .page-item.active a {
-        background-color: #e0e0e0;
-        font-weight: bold;
-    }
-
-    .pagination-custom .page-item.disabled span {
-        opacity: 0.5;
-        cursor: default;
-    }
-
-    .pagination-custom .dots {
-        padding: 0 0.5rem;
-        color: #999;
-    }
-</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
 
 <p>Total Applications: @Model.TotalApplications</p>
 <div id = "results">
     <table>
-    @foreach (var app in Model.Applications)
+    @foreach (var app in Model.Applications1)
     {
         <tr>
-            <td>@app.ApplicationNo</td>
-            <td>@app.ApplicantName</td>
+            <td>@app.property1</td>
+            <td>@app.property2</td>
         </tr>
     }
     </table>
@@ -135,6 +100,35 @@ FETCH NEXT @Take ROWS ONLY;
 
 @Ajax.AjaxPagination(
     Model.pageUs,
+    page => Url.Action("Index", new { page }),
+    new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "results" }
+)
+```
+
+---
+
+## 🖼 View Example For IQuerable (Razor)
+
+```cshtml
+@using USPage;
+@model MyViewModel
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+
+<p>Total Applications: @Model.TotalApplications</p>
+<div id = "results">
+    <table>
+    @foreach (var app in Model.Applications2.pageUSList)
+    {
+        <tr>
+            <td>@app.property1</td>
+            <td>@app.property2</td>
+        </tr>
+    }
+    </table>
+</div>
+
+@Ajax.AjaxPagination(
+    Model.Application2,
     page => Url.Action("Index", new { page }),
     new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "results" }
 )
@@ -155,6 +149,13 @@ FETCH NEXT @Take ROWS ONLY;
 | `NextPage`    | `true` if there are more pages                 |
 | `TotalCount`  | Optional total records (to enable "last page") |
 | `LastPage`    | Computed if `TotalCount` is set                |
+
+### `PageUSResult` Class
+
+| Property     | Description                                                     |
+| ------------ | --------------------------------------------------------------- |
+| `pageUS`     | Contains pagination metadata like CurrentPage, total count, etc |
+| `pageUSList` | A list of data items for the current page                       |
 
 ---
 
