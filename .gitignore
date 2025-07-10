@@ -8,5 +8,8 @@ obj/
 
 *.log
 
+*.nupkg
+*.nuspec
+
 *.dbmdl
 *.cache
