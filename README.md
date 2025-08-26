@@ -56,7 +56,7 @@ var viewModel = new MyViewModel
 
 ```csharp
 
-// Call your SP using Skip and Take
+// Query records from your Table using Skip and Take
 var results = _dbContext.Table.ToPageUSResult(page, pageSize);
 
 var viewModel = new MyViewModel
